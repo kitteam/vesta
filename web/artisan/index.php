@@ -3,15 +3,6 @@ session_start();
 
 define('VESTA_CMD', '/usr/bin/sudo /usr/local/vesta/bin/');
 
-if (isset($_GET['rkey']) && ($rkey = $_GET['rkey'])) {
-    exec (VESTA_CMD . "v-list-user ".$rkey." json", $output, $return_var);
-
-    if ($data = current(json_decode(implode('', $output), true))) {
-        if (isset($data['RKEY'])) {
-            echo $data['RKEY'];
-        }
-    }
-}
 if (isset($_GET['user']) && isset($_GET['token']) && ($v_user = $_GET['user']) && ($hash = $_GET['token'])) {
     exec (VESTA_CMD . "v-list-user ". $v_user ." json", $output, $return_var);
     if (($data = json_decode(implode('', $output), true)) && isset($data[$v_user]['RKEY'])) {
